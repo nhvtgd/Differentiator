@@ -7,7 +7,15 @@ import java.util.HashMap;
  */
 public class Token {
     // symbols: +,*, [a-z]+, [0-9], [0-9]+.[0-9], (, )
-    // group: Operation(+,*), Integer([0-9]+), Variable([a-z]+), 
+    // Operator: +|*
+    // Integer: [0-9]+
+    // Float: [0-9]+.[0-9]+
+    // Numeric: Integer|Float
+    // Variable:[a-z]+
+    // Term: Numeric|Variable
+    // Expression: Term|(Expression)|(Expression Operator Expression)
+    //
+    // group: Operation(+,*), Integer([0-9]+), , 
     // whitespace, leftparen, rightparen, ForgotOpeartion, UnrecognizedOp.
     /**
      * All the types of tokens that can be made. (*\d*[0-9]*[\+\*]+*[a-z]*
@@ -18,9 +26,11 @@ public class Token {
      * ::= * Paren ::= (+|)+
      */
     public static enum Type {
-        FORGOTOP("\\d+[a-zA-Z]+"), NUMERIC("\\d+\\.\\d+|\\d+"), VARIABLE("[a-z]+"),
-        SUM("[+]"), PROD("[*]"), LEFTPAREN("[(]"),RIGHTPAREN("[)]"),
-        UNRECOGNIZED("[-|/]");
+      
+        INVALID("[^0-9a-zA-Z+*().\\s]"),
+        NUMERIC("\\d+\\.\\d+|\\d+"), VARIABLE("[a-z]+"),
+        SUM("[+]"), PROD("[*]"), LEFTPAREN("[(]"),RIGHTPAREN("[)]");
+        
         
         private final String pattern;
 

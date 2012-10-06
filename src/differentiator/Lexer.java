@@ -33,23 +33,29 @@ public class Lexer {
      * @return ArrayList of type Token
      */
     public ArrayList<Token> lexAnalysis() {
+//        String[] temp = this.lex.split("[ ]+|");
         ArrayList<Token> tokens = new ArrayList<Token>();
         StringBuffer buffer = new StringBuffer();
         for (Token.Type type : Token.Type.values()) {
-            buffer.append(type.getPattern() + "|");
+            buffer.append("|" + type.getPattern());
         }
-        Pattern pattern = Pattern.compile(new String(buffer));
-        Matcher matcher = pattern.matcher(lex);
+//        for (String i : temp)
+//            System.out.println(i);
+        Pattern pattern = Pattern.compile(new String(buffer.substring(1)));                  
+        
+        System.out.println(buffer.substring(1).toString());
+//        Pattern pattern = Pattern.compile(new String(buffer.substring(1)));
+        Matcher matcher = pattern.matcher(this.lex);
         while (matcher.find()) {
-            for (Token.Type i : Token.Type.values()) {
-                if (matcher.group().matches(i.getPattern())) {
-                    tokens.add(new Token(i, matcher.group()));
-
+            for (Token.Type j : Token.Type.values()) {
+                if (matcher.group().matches(j.getPattern())) {
+                    tokens.add(new Token(j, matcher.group()));
+                    }
                 }
-            }
         }
-        return tokens;
-
+         return tokens;
+        
+        
     }
 
     public ArrayList<Token> checkValidExpression(ArrayList<Token> tokens)
@@ -66,27 +72,30 @@ public class Lexer {
                 parenCount++;
             else if (currentToken.getType().equals(Token.Type.RIGHTPAREN))
                 parenCount--;
-            else if (currentToken.getType().equals(Token.Type.FORGOTOP))
-                throw new IllegalArgumentException("Forget Operation Exception");
-            else if (currentToken.getType().equals(Token.Type.UNRECOGNIZED))
-                throw new IllegalArgumentException(
-                        "Unrecognized Operation Exception");
+            else if (currentToken.getType().equals(Token.Type.INVALID))
+                throw new IllegalArgumentException("INVALID ARGUMENT");
+            
 
         }
         return tokens;
 
     }
+    
+    public ArrayList<Token> wrapperLexer(){
+        return this.checkValidExpression(this.lexAnalysis());
+    }
 
     public static void main(String[] args) {
         // Lexer lexer = new
         // Lexer("((3 * (x + 2.4) + (2*x)*x)) + ((1*x)*(x-/x)))) + 3x - 3!");
-        Lexer lexer = new Lexer("(3.5 3 + 4 1000.1)");
-        ArrayList<Token> tokens = lexer.checkValidExpression(lexer.lexAnalysis());
+        Lexer lexer = new Lexer("(3.8a * 3 + 4 +  1000.1)");
+        ArrayList<Token> tokens = lexer.lexAnalysis();
+        
         System.out.println(tokens.toString());
         ArrayList<Token> expectedOutput = new ArrayList<Token>();
         expectedOutput.add(new Token(Token.Type.LEFTPAREN, "("));
         expectedOutput.add(new Token(Token.Type.NUMERIC, "3"));
-        expectedOutput.add(new Token(Token.Type.PROD, "-"));
+        expectedOutput.add(new Token(Token.Type.PROD, ""));
         expectedOutput.add(new Token(Token.Type.NUMERIC, "4"));
         expectedOutput.add(new Token(Token.Type.RIGHTPAREN, ")"));
         System.out.println(tokens.size());
