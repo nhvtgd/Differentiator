@@ -13,5 +13,9 @@ public class Multiply implements Expression{
     public String toString() {
         return "Prod("+ expr1.toString() +"," + expr2.toString() +")";
     }
+    
+    public <R> R accept(DiffVisitor<R> v) {        
+        return v.on(this);
+    }
 
 }

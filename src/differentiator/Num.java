@@ -13,5 +13,11 @@ public class Num implements Expression{
     public String toString() {
         return "Num("+num+")";
     }
+    
+    public <R> R accept(DiffVisitor<R> v) {        
+        return v.on(this);
+    }
+    
+    
 
 }

@@ -13,5 +13,9 @@ public class Sum implements Expression{
     public String toString() {
         return "Sum("+ expr1.toString() +"," + expr2.toString() +")";
     }
+    
+    public <R> R accept(DiffVisitor<R> v) {        
+        return v.on(this);
+    }
 
 }

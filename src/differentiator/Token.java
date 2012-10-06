@@ -29,7 +29,7 @@ public class Token {
       
         INVALID("[^0-9a-zA-Z+*().\\s]"),
         NUMERIC("\\d+\\.\\d+|\\d+"), VARIABLE("[a-z]+"),
-        SUM("[+]"), PROD("[*]"), LEFTPAREN("[(]"),RIGHTPAREN("[)]");
+        SUM("[+]"), PROD("[*]"), LEFTPAREN("[(]"),RIGHTPAREN("[)]"), EOF("EOF");
         
         
         private final String pattern;

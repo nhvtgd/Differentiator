@@ -12,5 +12,9 @@ public class Var implements Expression{
     public String toString() {
         return "Var("+ var +")";
     }
+    
+    public <R> R accept(DiffVisitor<R> v) {        
+        return v.on(this);
+    }
 
 }
