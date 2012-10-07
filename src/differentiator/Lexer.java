@@ -16,7 +16,7 @@ public class Lexer {
     /**
      * Creates the lexer over the passed string. string can't be {@code null}
      * type
-     *  
+     * 
      * @param string
      *            The string to tokenize.
      */
@@ -32,65 +32,76 @@ public class Lexer {
      * 
      * @return ArrayList of type Token
      */
-    public ArrayList<Token> lexAnalysis() {
-//        String[] temp = this.lex.split("[ ]+|");
+    private ArrayList<Token> lexAnalysis() {
+        // Hold the tokens
         ArrayList<Token> tokens = new ArrayList<Token>();
-        StringBuffer buffer = new StringBuffer();
+        // appended all regex into one String
+        StringBuffer regex = new StringBuffer();
         for (Token.Type type : Token.Type.values()) {
-            buffer.append("|" + type.getPattern());
+            regex.append("|" + type.getPattern());
         }
-//        for (String i : temp)
-//            System.out.println(i);
-        Pattern pattern = Pattern.compile(new String(buffer.substring(1)));                  
-        
-        System.out.println(buffer.substring(1).toString());
-//        Pattern pattern = Pattern.compile(new String(buffer.substring(1)));
+        System.out.println(regex.toString());
+        // created pattern from regex and removing the first |
+        Pattern pattern = Pattern.compile(new String(regex.substring(1)));
         Matcher matcher = pattern.matcher(this.lex);
         while (matcher.find()) {
             for (Token.Type j : Token.Type.values()) {
                 if (matcher.group().matches(j.getPattern())) {
                     tokens.add(new Token(j, matcher.group()));
-                    }
                 }
-        }
-         return tokens;
-        
-        
-    }
-
-    public ArrayList<Token> checkValidExpression(ArrayList<Token> tokens)
-            throws IllegalArgumentException {
-        if (!tokens.get(0).getType().equals(Token.Type.LEFTPAREN))
-            throw new IllegalArgumentException("Missing outer most parenthesis");
-        Iterator<Token> checkValid = tokens.iterator();
-        int parenCount = 0;
-        while (checkValid.hasNext()) {
-            if (parenCount < 0)
-                throw new IllegalArgumentException("Unbalanced Paren");
-            Token currentToken = checkValid.next();
-            if (currentToken.getType().equals(Token.Type.LEFTPAREN))
-                parenCount++;
-            else if (currentToken.getType().equals(Token.Type.RIGHTPAREN))
-                parenCount--;
-            else if (currentToken.getType().equals(Token.Type.INVALID))
-                throw new IllegalArgumentException("INVALID ARGUMENT");
-            
-
+            }
         }
         return tokens;
 
     }
-    
-    public ArrayList<Token> wrapperLexer(){
+
+    /**
+     * Check basic invalid expression such as missing paren, unbalanced paren or
+     * any invalid Token
+     * */
+    private ArrayList<Token> checkValidExpression(ArrayList<Token> tokens)
+            throws IllegalArgumentException, RuntimeException {
+        if (!tokens.get(0).getType().equals(Token.Type.LEFTPAREN))
+            throw new RuntimeException("Missing outer most parenthesis");
+        
+        Iterator<Token> checkValid = tokens.iterator();
+        // unbalance paren if the count of parenthesis goes to negative number
+        int parenCount = 0;
+        while (checkValid.hasNext()) {
+            if (parenCount < 0)
+                throw new RuntimeException("Unbalanced Paren");
+            Token currentToken = checkValid.next();
+            if (currentToken.getType().equals(Token.Type.LEFTPAREN))
+                ++parenCount;
+            else if (currentToken.getType().equals(Token.Type.RIGHTPAREN))
+                --parenCount;
+            else if (currentToken.getType().equals(Token.Type.INVALID))
+                throw new IllegalArgumentException("INVALID ARGUMENT");
+
+        }
+        System.out.println(parenCount);
+        if (parenCount != 0)
+            throw new RuntimeException("Unbalanced Paren");
+        return tokens;
+
+    }
+
+    /**
+     * wrapper class to wrap the valid expression
+     * 
+     * @return ArrayList of type Token
+     * */
+
+    public ArrayList<Token> wrapperLexer() {
         return this.checkValidExpression(this.lexAnalysis());
     }
 
     public static void main(String[] args) {
         // Lexer lexer = new
         // Lexer("((3 * (x + 2.4) + (2*x)*x)) + ((1*x)*(x-/x)))) + 3x - 3!");
-        Lexer lexer = new Lexer("(3.8a * 3 + 4 +  1000.1)");
-        ArrayList<Token> tokens = lexer.lexAnalysis();
-        
+        Lexer lexer = new Lexer("(3.8 * 3 + 4 +  1000.1)");
+        ArrayList<Token> tokens = lexer.wrapperLexer();
+
         System.out.println(tokens.toString());
         ArrayList<Token> expectedOutput = new ArrayList<Token>();
         expectedOutput.add(new Token(Token.Type.LEFTPAREN, "("));

@@ -14,9 +14,7 @@ public class Token {
     // Variable:[a-z]+
     // Term: Numeric|Variable
     // Expression: Term|(Expression)|(Expression Operator Expression)
-    //
-    // group: Operation(+,*), Integer([0-9]+), , 
-    // whitespace, leftparen, rightparen, ForgotOpeartion, UnrecognizedOp.
+    // Invalid: anything that are not listed
     /**
      * All the types of tokens that can be made. (*\d*[0-9]*[\+\*]+*[a-z]*
      * Operation :+,*, var : [a-z]+ number : integer and floating point, paren,
@@ -29,7 +27,8 @@ public class Token {
       
         INVALID("[^0-9a-zA-Z+*().\\s]"),
         NUMERIC("\\d+\\.\\d+|\\d+"), VARIABLE("[a-z]+"),
-        SUM("[+]"), PROD("[*]"), LEFTPAREN("[(]"),RIGHTPAREN("[)]"), EOF("EOF");
+        SUM("[+]"), PROD("[*]"), LEFTPAREN("[(]"),RIGHTPAREN("[)]"),
+        EOF("EOF");
         
         
         private final String pattern;

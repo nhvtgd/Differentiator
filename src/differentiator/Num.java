@@ -11,7 +11,7 @@ public class Num implements Expression{
     }
     @Override
     public String toString() {
-        return "Num("+num+")";
+        return num;
     }
     
     public <R> R accept(DiffVisitor<R> v) {        

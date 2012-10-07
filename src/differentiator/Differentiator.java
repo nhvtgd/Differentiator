@@ -19,7 +19,11 @@ public class Differentiator {
     public String evaluate(String expression, String variable) {
         // NOTE: Remember to implement differentiation with a visitor pattern.
         // NOTE: Remember to implement toString() with the interpreter pattern.
-        return "";
+        Lexer lex = new Lexer(expression);
+        Parser parse = new Parser(lex);
+        DiffVisitor<Expression> diff = new DifferentiateExpression(variable);
+        Expression result = parse.eParser().accept(diff);
+        return result.toString();
     }
 
     /**

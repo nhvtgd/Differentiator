@@ -1,29 +1,41 @@
 package differentiator;
 
-public class DifferentiateExpression implements DiffVisitor<> {
+public class DifferentiateExpression implements DiffVisitor<Expression> {
+    
+    private String variable;
 
-    @Override
-    public Object on(Num n) {
-        // TODO Auto-generated method stub
-        return null;
+
+    public DifferentiateExpression(String variable){
+        this.variable = variable;
+    }
+    public Expression on(Num n) {
+        
+        return new Num("0");
     }
 
-    @Override
-    public Object on(Var v) {
-        // TODO Auto-generated method stub
-        return null;
+    
+    public Expression on(Var v) {
+        if (v.getVar().equals(variable)) 
+            return new Var("1");
+        else
+            return new Num("0");
     }
 
-    @Override
-    public Object on(Sum s) {
+    
+    public Expression on(Sum s) {
         // TODO Auto-generated method stub
-        return null;
+        Expression expr1 = s.getExpr1().accept(this);
+        Expression expr2 = s.getExpr2().accept(this);
+        return new Sum(expr1,expr2);
     }
 
-    @Override
-    public Object on(Multiply l) {
-        // TODO Auto-generated method stub
-        return null;
+    
+    public Expression on(Multiply l) {               
+        Expression expr1 = l.getExpr1().accept(this);
+        Expression expr2 = l.getExpr2().accept(this);
+        return new Sum(new Multiply(l.getExpr1(),expr2),new Multiply(l.getExpr2(),expr1));
     }
+
+    
 
 }

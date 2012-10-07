@@ -8,9 +8,13 @@ public class Var implements Expression{
         this.var = var;
         
     }
+    
+    public String getVar() {
+        return var;
+    }
     @Override
     public String toString() {
-        return "Var("+ var +")";
+        return var;
     }
     
     public <R> R accept(DiffVisitor<R> v) {        
