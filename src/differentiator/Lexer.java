@@ -96,26 +96,5 @@ public class Lexer {
         return this.checkValidExpression(this.lexAnalysis());
     }
 
-    public static void main(String[] args) {
-        // Lexer lexer = new
-        // Lexer("((3 * (x + 2.4) + (2*x)*x)) + ((1*x)*(x-/x)))) + 3x - 3!");
-        Lexer lexer = new Lexer("(3.8 * 3 + 4 +  1000.1)");
-        ArrayList<Token> tokens = lexer.wrapperLexer();
-
-        System.out.println(tokens.toString());
-        ArrayList<Token> expectedOutput = new ArrayList<Token>();
-        expectedOutput.add(new Token(Token.Type.LEFTPAREN, "("));
-        expectedOutput.add(new Token(Token.Type.NUMERIC, "3"));
-        expectedOutput.add(new Token(Token.Type.PROD, ""));
-        expectedOutput.add(new Token(Token.Type.NUMERIC, "4"));
-        expectedOutput.add(new Token(Token.Type.RIGHTPAREN, ")"));
-        System.out.println(tokens.size());
-        System.out.println(expectedOutput.size());
-        int i = 0;
-        // for (Token token : tokens) {
-        // System.out.println(token.equals(expectedOutput.get(i++)));
-        //
-        // }
-    }
-
+   
 }
