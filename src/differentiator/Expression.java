@@ -1,5 +1,8 @@
 package differentiator;
-
+/**
+ * Interface for mathematical expression including number, variable
+ * Summation, Multiplication
+ * */
 public interface Expression {
 
     @Override

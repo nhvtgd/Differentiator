@@ -1,5 +1,7 @@
 package differentiator;
-
+/**
+ * Represent the constant class
+ * */
 public class Num implements Expression{
 
     private String num;

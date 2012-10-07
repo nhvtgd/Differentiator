@@ -50,7 +50,16 @@ public class DifferentiatorTest {
     public void multiParenthesisVariable() {
         Differentiator diff = new Differentiator();
         String output = "(1+0)";
-        String actual = diff.evaluate("((((x+3))))","x");
+        String actual = diff.evaluate("(((((x+3)))))","x");
+        assertEquals(output, actual);
+    }
+    
+    
+    @Test
+    public void longVariable() {
+        Differentiator diff = new Differentiator();
+        String output = "(1+0)";
+        String actual = diff.evaluate("(foo + bar)","foo");
         assertEquals(output, actual);
     }
     

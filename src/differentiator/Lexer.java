@@ -40,7 +40,6 @@ public class Lexer {
         for (Token.Type type : Token.Type.values()) {
             regex.append("|" + type.getPattern());
         }
-        System.out.println(regex.toString());
         // created pattern from regex and removing the first |
         Pattern pattern = Pattern.compile(new String(regex.substring(1)));
         Matcher matcher = pattern.matcher(this.lex);
