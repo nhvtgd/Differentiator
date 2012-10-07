@@ -8,12 +8,14 @@ import java.util.Iterator;
  */
 public class Parser {
     private final Iterator<Token> tokens;
-    private Token currentToken; // the pointer to the current token after the call to getTokens
+    private Token currentToken; // the pointer to the current token after the
+                                // call to getTokens
 
-    /** Created a passing using the token from the lexer
-     * The lexer already checked for basic valid input such as balanced paren, having left paren,
-     * valid character. However, it doesn't check for valid Expression
-     * require: lexer can't be null
+    /**
+     * Created a passing using the token from the lexer The lexer already
+     * checked for basic valid input such as balanced paren, having left paren,
+     * valid character. However, it doesn't check for valid Expression require:
+     * lexer can't be null
      * 
      * */
     public Parser(Lexer lexer) {
@@ -21,7 +23,7 @@ public class Parser {
         this.currentToken = null;
 
     }
-     
+
     // return the next Token if there is one or EOF
     private Token getTokens() {
         if (tokens.hasNext())
@@ -29,7 +31,7 @@ public class Parser {
         else
             return new Token(Token.Type.EOF, "EOF");
     }
-    
+
     // assertion for checking the argument passing in is legal
     private void expect(Token.Type token) {
         if (currentToken.getType() == token)
@@ -38,8 +40,10 @@ public class Parser {
             throw new IllegalArgumentException("Illegal token +" + token);
 
     }
-    
-    /** Return the Binary tree of an expression
+
+    /**
+     * Return the Binary tree of an expression
+     * 
      * @return Expression
      * */
     public Expression eParser() {
@@ -52,25 +56,26 @@ public class Parser {
     }
 
     /**
-     * Follow the actual grammar rule E = "(" T [+|-] T + ")" 
+     * Follow the actual grammar rule E = "(" T [+|-] T + ")"
+     * 
      * @return Expression
      * */
-    private Expression E() {        
+    private Expression E() {
         Expression expr = null;
-        
+
         Expression expr1 = null;
-        
+
         Token next = currentToken;
         if (next.getType().equals(Token.Type.LEFTPAREN)) {
-            //hold the value of the current token before recursion
+            // hold the value of the current token before recursion
             currentToken = getTokens();
             expr = T();
             Token next2 = currentToken;
-            if (next2.getType().equals(Token.Type.RIGHTPAREN)) { 
+            if (next2.getType().equals(Token.Type.RIGHTPAREN)) {
                 // Singleton Expression, return
                 currentToken = getTokens();
                 return expr;
-            // expected operator after an Expression T
+                // expected operator after an Expression T
             } else if (next2.getType().equals(Token.Type.SUM)
                     || next2.getType().equals(Token.Type.PROD)) {
                 currentToken = getTokens();
@@ -96,11 +101,12 @@ public class Parser {
         } else
             throw new RuntimeException("Expected Opening parenthesis ");
     }
+
     // Contain the terminal Num|Var|Expression
     private Expression T() {
         Expression term = null;
         Token next = currentToken;
-        
+
         if (next.getType().equals(Token.Type.NUMERIC)) {
             term = new Num(next.getPattern());
             currentToken = getTokens();
@@ -119,18 +125,14 @@ public class Parser {
         }
 
     }
+
     /**
-     * Call the to String method on valid mathematical expression*/
+     * Call the to String method on valid mathematical expression
+     */
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
+
         return eParser().toString();
-    }
-
-    public static void main(String[] args) {
-        Parser parse = new Parser(new Lexer("((((a+2)*c) + (10+5)) + 5)"));
-        System.out.println(parse);
-
     }
 
 }

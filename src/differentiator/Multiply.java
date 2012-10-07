@@ -24,7 +24,7 @@ public class Multiply implements Expression {
     }
 
     public Expression getExpr2() {
-        // TODO Auto-generated method stub
+        
         return expr2;
     }
 

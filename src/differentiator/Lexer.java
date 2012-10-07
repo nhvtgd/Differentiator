@@ -78,7 +78,7 @@ public class Lexer {
                 throw new IllegalArgumentException("INVALID ARGUMENT");
 
         }
-        System.out.println(parenCount);
+        
         if (parenCount != 0)
             throw new RuntimeException("Unbalanced Paren");
         return tokens;
