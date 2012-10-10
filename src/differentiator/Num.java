@@ -1,6 +1,6 @@
 package differentiator;
 /**
- * Represent the constant class
+ * Represent the constant class implement Expression interface
  * */
 public class Num implements Expression{
 

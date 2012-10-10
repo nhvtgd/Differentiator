@@ -1,5 +1,6 @@
 package differentiator;
-
+/**Multiply Expression implement Expression interface
+ * */
 public class Multiply implements Expression {
 
     private Expression expr1;

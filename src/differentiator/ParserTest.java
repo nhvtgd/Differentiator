@@ -13,9 +13,9 @@ public class ParserTest {
         String output = "x";
         assertEquals(parser.toString(),output);
         
-        Lexer lexer2 = new Lexer("(3)");
+        Lexer lexer2 = new Lexer("(X)");
         Parser parser2 = new Parser(lexer2);
-        String output2 = "3";
+        String output2 = "X";
         assertEquals(parser2.toString(),output2);
     }
     

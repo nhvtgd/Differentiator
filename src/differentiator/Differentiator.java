@@ -17,8 +17,6 @@ public class Differentiator {
      * @return The expression's derivative.
      */
     public String evaluate(String expression, String variable) {
-        // NOTE: Remember to implement differentiation with a visitor pattern.
-        // NOTE: Remember to implement toString() with the interpreter pattern.
         Lexer lex = new Lexer(expression);
         Parser parse = new Parser(lex);
         DiffVisitor<Expression> diff = new DifferentiateExpression(variable);

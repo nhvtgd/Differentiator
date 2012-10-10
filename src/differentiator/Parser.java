@@ -6,6 +6,9 @@ import java.util.Iterator;
  * The parser gets a bunch of tokens from the lexer and determines what
  * expression was written by the user.
  */
+// Grammar rule
+// E = "(" T [+|-] T + ")" | "(" T ")"
+// T = Num|VAR|E
 public class Parser {
     private final Iterator<Token> tokens;
     private Token currentToken; // the pointer to the current token after the
@@ -47,17 +50,19 @@ public class Parser {
      * @return Expression
      * */
     public Expression eParser() {
-        Expression t = null;
+        Expression resultExpression = null;
         currentToken = getTokens();
-        t = E();
+        resultExpression = E();
         expect(Token.Type.EOF);
-        return t;
+        return resultExpression;
 
     }
 
     /**
-     * Follow the actual grammar rule E = "(" T [+|-] T + ")"
-     * 
+     * Follow the actual grammar rule 
+     * E = "(" T [+|-] T + ")" | "(" T ")"
+     * T = Num|VAR|E
+     * modifies expression
      * @return Expression
      * */
     private Expression E() {

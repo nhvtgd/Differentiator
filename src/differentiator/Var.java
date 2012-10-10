@@ -1,5 +1,7 @@
 package differentiator;
-
+/**
+ * Variable class that implements Expression interface
+ * */
 public class Var implements Expression{
 
     private String var;

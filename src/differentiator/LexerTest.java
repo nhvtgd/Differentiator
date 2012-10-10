@@ -6,11 +6,9 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 public class LexerTest {
-    
+
     @Test
     public void testPlus() {
-        // constant + constant
-        // constant * constant
         ArrayList<Token> expectedOutput = new ArrayList<Token>();
         expectedOutput.add(new Token(Token.Type.LEFTPAREN, "("));
         expectedOutput.add(new Token(Token.Type.NUMERIC, "3"));
@@ -22,15 +20,12 @@ public class LexerTest {
         assertArrayEquals(expectedOutput.toArray(), actualResult.toArray());
         for (int i = 0; i < expectedOutput.size(); i++) {
             assertTrue(expectedOutput.get(i).equals(actualResult.get(i)));
-            // System.out.println(actual.get(i));
         }
 
     }
 
     @Test
     public void testMultiply() {
-        // constant + constant
-        // constant * constant
         ArrayList<Token> expectedOutput = new ArrayList<Token>();
         expectedOutput.add(new Token(Token.Type.LEFTPAREN, "("));
         expectedOutput.add(new Token(Token.Type.NUMERIC, "3"));
@@ -42,15 +37,12 @@ public class LexerTest {
         assertArrayEquals(expectedOutput.toArray(), actualResult.toArray());
         for (int i = 0; i < expectedOutput.size(); i++) {
             assertTrue(expectedOutput.get(i).equals(actualResult.get(i)));
-            // System.out.println(actual.get(i));
         }
 
     }
 
     @Test
     public void testNumeric() {
-        // constant + constant
-        // constant * constant
         ArrayList<Token> expectedOutput = new ArrayList<Token>();
         expectedOutput.add(new Token(Token.Type.LEFTPAREN, "("));
         expectedOutput.add(new Token(Token.Type.NUMERIC, "3.5"));
@@ -64,15 +56,12 @@ public class LexerTest {
         assertArrayEquals(expectedOutput.toArray(), actualResult.toArray());
         for (int i = 0; i < expectedOutput.size(); i++) {
             assertTrue(expectedOutput.get(i).equals(actualResult.get(i)));
-            // System.out.println(actual.get(i));
         }
 
     }
 
     @Test
     public void testVariable() {
-        // constant + constant
-        // constant * constant
         ArrayList<Token> expectedOutput = new ArrayList<Token>();
         expectedOutput.add(new Token(Token.Type.LEFTPAREN, "("));
         expectedOutput.add(new Token(Token.Type.VARIABLE, "fooo"));
@@ -90,10 +79,26 @@ public class LexerTest {
 
     }
 
+    @Test
+    public void testCaptialArgument() {
+        ArrayList<Token> expectedOutput = new ArrayList<Token>();
+        expectedOutput.add(new Token(Token.Type.LEFTPAREN, "("));
+        expectedOutput.add(new Token(Token.Type.VARIABLE, "FOOO"));
+        expectedOutput.add(new Token(Token.Type.VARIABLE, "ABC"));
+        expectedOutput.add(new Token(Token.Type.VARIABLE, "X"));
+        expectedOutput.add(new Token(Token.Type.VARIABLE, "ZZZZZ"));
+        expectedOutput.add(new Token(Token.Type.RIGHTPAREN, ")"));
+        Lexer actual = new Lexer("(FOOO ABC X ZZZZZ)");
+        ArrayList<Token> actualResult = actual.wrapperLexer();
+        assertArrayEquals(expectedOutput.toArray(), actualResult.toArray());
+        for (int i = 0; i < expectedOutput.size(); i++) {
+            assertTrue(expectedOutput.get(i).equals(actualResult.get(i)));
+        }
+
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidArgument() {
-        // constant + constant
-        // constant * constant
         ArrayList<Token> expectedOutput = new ArrayList<Token>();
         expectedOutput.add(new Token(Token.Type.LEFTPAREN, "("));
         expectedOutput.add(new Token(Token.Type.INVALID, "!"));
@@ -106,7 +111,6 @@ public class LexerTest {
         assertArrayEquals(expectedOutput.toArray(), actualResult.toArray());
         for (int i = 0; i < expectedOutput.size(); i++) {
             assertTrue(expectedOutput.get(i).equals(actualResult.get(i)));
-            // System.out.println(actual.get(i));
         }
 
     }
@@ -127,7 +131,7 @@ public class LexerTest {
 
     @Test(expected = RuntimeException.class)
     public void testMissingOuterMostParen() {
-        ArrayList<Token> expectedOutput = new ArrayList<Token>();        
+        ArrayList<Token> expectedOutput = new ArrayList<Token>();
         expectedOutput.add(new Token(Token.Type.NUMERIC, "5"));
         expectedOutput.add(new Token(Token.Type.RIGHTPAREN, ")"));
         Lexer actual = new Lexer("5)");
@@ -135,6 +139,7 @@ public class LexerTest {
         assertArrayEquals(expectedOutput.toArray(), actualResult.toArray());
 
     }
+
     @Test
     public void testEmptyArgument() {
 

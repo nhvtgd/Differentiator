@@ -1,6 +1,6 @@
 package differentiator;
 /**
- * This visitor class will differente expression based on
+ * This visitor class will differentiate expression based on
  * the Type of the expression
  * */
 public class DifferentiateExpression implements DiffVisitor<Expression> {
