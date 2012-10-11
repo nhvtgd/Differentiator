@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class S {
+public class DifferentiatorTest {
 
     @Test
     public void singletonVar() {
@@ -63,6 +63,13 @@ public class S {
         assertEquals(output, actual);
     }
     
-    
+    @Test
+    public void complexExpression() {
+        Differentiator diff = new Differentiator();
+        String output = "((((((0+0)+0)+0)+0)+0)+0)";
+        String actual = diff.evaluate("(((((((1) + 2) + 3) + 4) + 5) + 6) + 7)","x");
+        assertEquals(output, actual);
+    }
+   
 
 }
