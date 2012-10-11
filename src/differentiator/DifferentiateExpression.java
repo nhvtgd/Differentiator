@@ -24,7 +24,6 @@ public class DifferentiateExpression implements DiffVisitor<Expression> {
     }
 
     public Expression on(Sum s) {
-        // TODO Auto-generated method stub
         Expression expr1 = s.getExpr1().accept(this);
         Expression expr2 = s.getExpr2().accept(this);
         return new Sum(expr1, expr2);

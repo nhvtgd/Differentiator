@@ -71,5 +71,11 @@ public class DifferentiatorTest {
         assertEquals(output, actual);
     }
    
-
+    @Test
+    public void complexExpressionWithCap() {
+        Differentiator diff = new Differentiator();
+        String output = "(((((A+B)*(C+D))+((E+F)*(G+H)))*((((I*0)+(J*0))+((K*0)+(L*0)))+(((M+N)*(0+0))+((O+P)*(0+0)))))+((((I*J)+(K*L))+((M+N)*(O+P)))*((((A+B)*(0+0))+((C+D)*(1+0)))+(((E+F)*(0+0))+((G+H)*(0+0))))))";
+        String actual = diff.evaluate("((((A+B) * (C+D)) + ((E+F) * (G+H))) * (((I*J) + (K*L)) + ((M+N) * (O+P))))","A");
+        assertEquals(output, actual);
+    }
 }
