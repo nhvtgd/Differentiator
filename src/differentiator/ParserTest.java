@@ -57,15 +57,15 @@ public class ParserTest {
     }
     
     @Test
-    public void testNestedExpression() {
+    public void testNestedExpressionAndCap() {
         Lexer lexer = new Lexer("((x*b)+(2*3))");
         Parser parser = new Parser(lexer);
         String output = "((x*b)+(2*3))";
         assertEquals(parser.toString(),output);
         
-        Lexer lexer2 = new Lexer("((2*x    )+     (   y*x     ))");
+        Lexer lexer2 = new Lexer("((2*X    )+     (   Y*X     ))");
         Parser parser2 = new Parser(lexer2);
-        String output2 = "((2*x)+(y*x))";
+        String output2 = "((2*X)+(Y*X))";
         assertEquals(parser2.toString(),output2);
         
         Lexer lexer3 = new Lexer("((4 + (3 * x)) + (((2 * x) * x) + ((1 * x) * (x * x))))");
