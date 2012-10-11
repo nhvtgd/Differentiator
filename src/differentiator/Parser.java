@@ -59,9 +59,9 @@ public class Parser {
     }
 
     /**
-     * Follow the actual grammar rule 
+     * Follow the actual grammar rule , E() is non-terminal
      * E = "(" T [+|-] T + ")" | "(" T ")"
-     * T = Num|VAR|E
+     * T = Num|Var|E
      * modifies expression
      * @return Expression
      * */

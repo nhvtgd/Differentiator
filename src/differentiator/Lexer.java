@@ -58,7 +58,7 @@ public class Lexer {
      * Check basic invalid expression such as missing paren, unbalanced paren or
      * any invalid Token
      * @param original Token ArrayList
-     * @return Valid Token ArrayList
+     * @return Valid Token ArrayList i.e no unbalanced paren, no invalid token
      * */
     private ArrayList<Token> checkValidExpression(ArrayList<Token> tokens)
             throws IllegalArgumentException, RuntimeException {
