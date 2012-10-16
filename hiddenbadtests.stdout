@@ -1,0 +1,47 @@
+Buildfile: /home/grader/ps2/viettran/build.xml
+
+init:
+
+compile-ours:
+
+test-bad:
+    [junit] Testsuite: grader.HiddenBadTests
+    [junit] Tests run: 34, Failures: 0, Errors: 0, Time elapsed: 0.137 sec
+    [junit] 
+    [junit] Testcase: testMissingOperandInt_dx took 0.005 sec
+    [junit] Testcase: testMissingIntOperand_dx took 0.001 sec
+    [junit] Testcase: testMissingOperandFloat_dx took 0.001 sec
+    [junit] Testcase: testMissingOperandVars_dx took 0.004 sec
+    [junit] Testcase: testMissingOperandParens_dx took 0.003 sec
+    [junit] Testcase: testExtraLParen_dx took 0.001 sec
+    [junit] Testcase: testExtraRParen_dx took 0.001 sec
+    [junit] Testcase: testEmptyString_dx took 0 sec
+    [junit] Testcase: testEmptyParens_dx took 0.001 sec
+    [junit] Testcase: testManyEmptyParens_dx took 0.002 sec
+    [junit] Testcase: testSingleLParen_dx took 0 sec
+    [junit] Testcase: testSingleRParen_dx took 0.001 sec
+    [junit] Testcase: testSingleTimes_dx took 0.001 sec
+    [junit] Testcase: testSinglePlus_dx took 0 sec
+    [junit] Testcase: testSingleParendTimes_dx took 0.001 sec
+    [junit] Testcase: testSingleParendPlus_dx took 0.009 sec
+    [junit] Testcase: testLeadingParendVariable_dx took 0.002 sec
+    [junit] Testcase: testTrailingParendVariable_dx took 0.003 sec
+    [junit] Testcase: testLeadingParendPlus_dx took 0.002 sec
+    [junit] Testcase: testTrailingParendPlus_dx took 0.002 sec
+    [junit] Testcase: testLeadingParendTimes_dx took 0.001 sec
+    [junit] Testcase: testTrailingParendTimes_dx took 0.01 sec
+    [junit] Testcase: testTrailingVariable_dx took 0.002 sec
+    [junit] Testcase: testTrailingPlus_dx took 0.002 sec
+    [junit] Testcase: testTrailingTimes_dx took 0.001 sec
+    [junit] Testcase: testLeadingVariable_dy took 0.001 sec
+    [junit] Testcase: testTrailingVariable_dy took 0.001 sec
+    [junit] Testcase: testLeadingPlus_dy took 0.002 sec
+    [junit] Testcase: testTrailingPlus_dy took 0.004 sec
+    [junit] Testcase: testLeadingTimes_dy took 0.006 sec
+    [junit] Testcase: testTrailingTimes_dy took 0.01 sec
+    [junit] Testcase: testBang_dx took 0.001 sec
+    [junit] Testcase: testDollar_dx took 0.001 sec
+    [junit] Testcase: testPound_dx took 0.001 sec
+
+BUILD SUCCESSFUL
+Total time: 1 second
