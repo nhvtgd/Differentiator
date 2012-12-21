@@ -26,7 +26,8 @@ public class Parser {
         this.currentToken = null;
 
     }
-
+    
+    
     // return the next Token if there is one or EOF
     private Token getTokens() {
         if (tokens.hasNext())
@@ -43,7 +44,7 @@ public class Parser {
             throw new IllegalArgumentException("Illegal token +" + token);
 
     }
-
+    
     /**
      * Return the Binary tree of an expression
      * 
